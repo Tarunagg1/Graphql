@@ -1,0 +1,23 @@
+{
+  "name": "eventapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^15.0.0",
+    "express": "^4.17.2",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.3.0",
+    "mongoose": "^6.1.9"
+  }
+}
