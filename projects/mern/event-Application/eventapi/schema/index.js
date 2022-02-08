@@ -28,6 +28,21 @@ var schema = buildSchema(`
     updatedAt:String!
   }
 
+  type BookingFull{
+    _id:ID
+    eventId:Event
+    userId:user
+    createdAt:String!
+    updatedAt:String!
+  }
+
+  type authData{
+    userid:ID!
+    token:String!
+    tokenExpire:Int
+  }
+
+
   input userInput{
     name:String!,
     email:String!,
@@ -40,17 +55,18 @@ var schema = buildSchema(`
   }
 
 
-  input EventInput{
-      title:String!,
-      description:String!,
-      price:Float!,
-      date:String,
-      creator:ID!
-  }
+    input EventInput{
+        title:String!,
+        description:String!,
+        price:Float!,
+        date:String,
+        creator:ID!
+    }
 
     type RootQuery {
       events:[Event!]!
-      bookings:[user]
+      bookings:[BookingFull!]
+      login(email:String!,password:String!):authData
     },
   
 
@@ -58,7 +74,7 @@ var schema = buildSchema(`
       createEvent(EventInput:EventInput):Event
       createUser(userInput:userInput):user
       bookingEvent(bookingInput:bookingInput):Booking
-
+      cancelBooking(id:ID):BookingFull
     }
 
   schema{
