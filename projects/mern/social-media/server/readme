@@ -1,0 +1,17 @@
+# LOGIN
+
+mutation{
+    login(username:"Tarun",password:"tarun"){
+        id,
+        token
+    }
+}
+
+
+# register
+
+mutation{
+  register(registerInput:{username:"Tarun",password:"tarun",confirmPassword:"tarun",email:"tarun@gmail.com"}){
+    email
+  }
+}
