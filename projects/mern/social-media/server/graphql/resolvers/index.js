@@ -3,7 +3,12 @@ const usersResolvers = require('./users');
 
 
 module.exports = {
-    Mutation: {
+    Query: {
+        ...postsResolvers.Query
+      },
+      Mutation: {
         ...usersResolvers.Mutation,
-    },
+        ...postsResolvers.Mutation,
+        // ...commentsResolvers.Mutation
+      },
 }
