@@ -1,0 +1,41 @@
+# Write your query or mutation here
+# Write your query or mutation here
+query {
+ users{
+  firstName,
+  _id,
+  lastName,
+  email,
+  quotes{
+    name,
+    by
+  }
+}
+}
+
+------------------- quotes
+query{
+  quotes{
+    name,
+    by
+  }
+}
+
+------------------------- single user
+query getuserById{
+  user(id:"23131"){
+    firstName,
+    email,
+    lastName
+  }
+}
+
+
+------------------ single quote
+query getQuoteById{
+ 	quote(by:"4232"){
+    name,
+    by
+  } 
+}
+
