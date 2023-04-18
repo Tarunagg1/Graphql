@@ -7,6 +7,8 @@ import {
     ApolloServerPluginLandingPageDisabled
 } from 'apollo-server-core';
 
+import jwt from 'jsonwebtoken';
+
 import typeDefs from './schemaGql/schemaGql.js';
 
 import './models/User.js';
@@ -18,10 +20,18 @@ import './config/db.js';
 
 const port = process.env.PORT || 4000;
 
+const context = ({ req }) => {
+    const { authorization } = req.headers;
+    if (authorization) {
+        const { userId } = jwt.verify(authorization, process.env.JWT_SECRET)
+        return { userId }
+    }
+}
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context,
     plugins: [
         // ApolloServerPluginDrainHttpServer({ httpServer }),
         process.env.NODE_ENV !== "production" ?

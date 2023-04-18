@@ -10,5 +10,6 @@ export default {
     },
     Mutation: {
         ...authResolver.Mutation,
+        ...quotesResolver.Mutation,
     }
 }

@@ -1,23 +1,36 @@
-import { users, quotes } from '../fakedb.js';
+import mongoose from 'mongoose';
+const Quote = mongoose.model("Quote")
+const User = mongoose.model("User")
+
 
 const resolvers = {
     Query: {
-        greet: () => {
-            return "hello world";
+        users: async () => {
+            return await User.find();
         },
-        users: () => {
-            return users
+        quotes: async () => {
+            return await Quote.find({}).populate("by","_id firstName")
         },
-        quotes: () => quotes,
-        user: (_, args) => {
-            return users.find(user => user._id == args.id)
+        user: async (_, { _id }) => {
+            return await User.findById(_id);
         },
-        quote: (_, args) => {
-            return quotes.find(quote => quote.by == args.by)
+        quote: async (_, { by }) => {
+            return await Quote.find({ by });
         }
     },
     User: {
-        quotes: (us) => quotes.filter((ele) => ele.by == us._id)
+        quotes: async (us) => await Quote.find({ by: us._id })
+    },
+    Mutation: {
+        async createQuote(_, { name }, { userId }) {
+            if (!userId) throw new Error("You must be logged in")
+            const newQuote = new Quote({
+                name,
+                by: userId
+            })
+            await newQuote.save()
+            return "Quote saved successfully"
+        }
     }
 }
 

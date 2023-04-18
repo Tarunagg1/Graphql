@@ -17,7 +17,10 @@ query {
 query{
   quotes{
     name,
-    by
+    by{
+      firstName,
+      _id
+    }
   }
 }
 
@@ -39,3 +42,30 @@ query getQuoteById{
   } 
 }
 
+
+
+mutation {
+  signinUser(
+    userSignin:{
+    email: "tarun@gmail.com",
+    password: "tarun"}
+  ){
+    token
+  }
+}
+
+
+{
+  "data": {
+    "signinUser": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDNkMTEzZWM0NGI0ZTZkZWU1NDQyOWMiLCJpYXQiOjE2ODE4MjUxMDh9.fVpJaIun-ZwpywLfv-_GCq4UfmAfUCLjbK5qPLtcsyk"
+    }
+  }
+}
+
+
+---- creat quote
+
+mutation createQuote{
+  createQuote(name:"ihdid")
+}
