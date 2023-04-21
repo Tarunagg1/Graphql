@@ -9,13 +9,17 @@ const resolvers = {
             return await User.find();
         },
         quotes: async () => {
-            return await Quote.find({}).populate("by","_id firstName")
+            return await Quote.find({}).populate("by", "_id firstName")
         },
-        user: async (_, { _id }) => {
-            return await User.findById(_id);
+        user: async (_, { id }) => {
+            return await User.findById(id);
         },
         quote: async (_, { by }) => {
             return await Quote.find({ by });
+        },
+        myProfile: async (_, args, { userId }) => {
+            if (!userId) throw new Error("You must be logged in");
+            return await User.findById(userId);
         }
     },
     User: {

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 
 const typeDefs = gql`
@@ -7,6 +7,7 @@ const typeDefs = gql`
         users:[User],
         quotes:[QuoteWithName],
         quote(by:ID!):Quote,
+        myProfile:User,
     }
 
     type QuoteWithName{
